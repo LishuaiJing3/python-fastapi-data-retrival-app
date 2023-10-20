@@ -1,0 +1,1 @@
+::: python_fastapi_data_retrival_app
