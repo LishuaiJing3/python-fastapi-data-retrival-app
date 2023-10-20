@@ -4,6 +4,9 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 import requests
 from datetime import datetime as dt
+import os
+import dotenv
+dotenv.load_dotenv()
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -67,10 +70,11 @@ app.layout = dbc.Container(
      State('my-date-picker-range', 'end_date')]  
 )    
 def get_data(n_clicks, start_date, end_date):  
-    if n_clicks > 0:    
+    if n_clicks > 0: 
+        cols_to_retrieve = os.getenv("COLUMNS").split(',')
         response = requests.post('http://localhost:8000/data',    
                                  json={"start_date": start_date, "end_date": end_date,    
-                                       "columns": ["HOME_ID", "DEV_ID"]})    
+                                       "columns": cols_to_retrieve})    
         if response.status_code == 200:    
             data = response.json()  
             df = pd.DataFrame(data)    

@@ -6,7 +6,7 @@
 [![Commit activity](https://img.shields.io/github/commit-activity/m/Lishuaijing3/python-fastapi-data-retrival-app)](https://img.shields.io/github/commit-activity/m/Lishuaijing3/python-fastapi-data-retrival-app)
 [![License](https://img.shields.io/github/license/Lishuaijing3/python-fastapi-data-retrival-app)](https://img.shields.io/github/license/Lishuaijing3/python-fastapi-data-retrival-app)
 
-This project using python fastAPI framwork to retrive data from a databricks workspace (you can customise to similar databases)
+This project using python fastAPI framework to retrieve data from a databricks workspace (you can customize to similar databases) and display it using dash.
 
 - **Github repository**: <https://github.com/Lishuaijing3/python-fastapi-data-retrival-app/>
 - **Documentation** <https://Lishuaijing3.github.io/python-fastapi-data-retrival-app/>
@@ -39,10 +39,12 @@ For activating the automatic documentation with MkDocs, see
 [here](https://fpgmaas.github.io/cookiecutter-poetry/features/mkdocs/#enabling-the-documentation-on-github).
 To enable the code coverage reports, see [here](https://fpgmaas.github.io/cookiecutter-poetry/features/codecov/).
 
+### Setup connection with databricks odbc conector
+- [Connect to ODBC server when using databricks](https://docs.databricks.com/en/integrations/jdbc-odbc-bi.html)
 
 ## Run different apps
 
-### Run backend:
+### Run fastAPI backend:
 ``` bash
 poetry run uvicorn python_fastapi_data_retrival_app.fastAPI_backend:app --port 8000 --reload 
 ``` 
@@ -53,9 +55,6 @@ To test the backend, using http://127.0.0.1:8000/docs, then you can use post and
 poetry run python python_fastapi_data_retrival_app/dash_frontend.py
 ``` 
 ## Releasing a new version
-
-
-
 ---
 
 Repository initiated with [fpgmaas/cookiecutter-poetry](https://github.com/fpgmaas/cookiecutter-poetry).

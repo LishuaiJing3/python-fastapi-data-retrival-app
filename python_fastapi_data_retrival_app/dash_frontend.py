@@ -4,6 +4,9 @@ from dash import html
 from dash.dependencies import Output, Input  
 import requests  
 from datetime import datetime as dt
+import os
+import dotenv
+dotenv.load_dotenv()
   
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']  
   
@@ -29,7 +32,8 @@ app.layout = html.Div([
 )  
 def get_data(n_clicks, start_date, end_date):  
     if n_clicks > 0:  
-        response = requests.post('http://localhost:8000/data', json={"start_date": start_date, "end_date": end_date, "columns": ["HOME_ID", "DEV_ID"]})  
+        cols_to_retrieve = os.getenv("COLUMNS").split(',')
+        response = requests.post('http://localhost:8000/data', json={"start_date": start_date, "end_date": end_date, "columns": cols_to_retrieve})  
         if response.status_code == 200:  
             return 'Data downloaded successfully.'  
         else:  

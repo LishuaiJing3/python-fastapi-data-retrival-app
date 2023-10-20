@@ -1,8 +1,13 @@
 #%%
 import pyodbc
+import os
+import dotenv
+
+dotenv.load_dotenv()
 
 # Replace <table-name> with the name of the database table to query.
-table_name = "active_fw_table"
+table_name = os.getenv("TABLE_NAME")
+#%%
 
 # Connect to the SQL warehouse by using the
 # Data Source Name (DSN) that you created earlier.
