@@ -26,6 +26,7 @@ async def get_data(filter: Filter):
     print(filter.end_date)
     #date_format = "%Y-%m-%dT%H:%M:%S.%fZ"
     date_format = "%Y-%m-%d"
+    #date_format = "%Y-%m-%dT%H:%M:%S"
     start_date = dt.strptime(filter.start_date, date_format)
     end_date = dt.strptime(filter.end_date, date_format)
     # Connect to the SQL warehouse by using the
@@ -47,9 +48,12 @@ async def get_data(filter: Filter):
     # data = your_data_processing_function(data)  
   
     # Save dataframe to csv  
-    data.to_csv('data/data.csv', index=False)  
+    data.to_csv('data/data.csv', index=False)   
   
-    return {"message": "Data processed and saved to data.csv"}  
+    # Convert the DataFrame to a dictionary and return it  
+    return data.to_dict('records')  
+  
+    #return {"message": "Data processed and saved to data.csv"}  
   
 @app.get("/download/")  
 async def download_csv():  
