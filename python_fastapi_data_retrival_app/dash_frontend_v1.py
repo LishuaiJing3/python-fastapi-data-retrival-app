@@ -83,7 +83,6 @@ def get_data(n_clicks, start_date, end_date):
             return 'Data retrived from server successfully.', df.to_dict('records'), columns    
         else:    
             return 'Error downloading data.', [], []    
-    #return '', [], []  # Empty string and empty lists as default return values  
 
 
 @app.callback(

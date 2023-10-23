@@ -10,9 +10,6 @@ load_dotenv()
   
 def retrieve_data(start_date: str, end_date: str):  
     cols_to_retrieve = os.getenv("COLUMNS").split(',')  
-    print(cols_to_retrieve)  
-    print(start_date) 
-    print(end_date) 
     response = requests.post(  
         'http://localhost:8000/data',  
         json={  

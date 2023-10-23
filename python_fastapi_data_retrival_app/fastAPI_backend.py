@@ -1,15 +1,15 @@
 from fastapi import FastAPI, HTTPException  
 from pydantic import BaseModel  
-from typing import Optional, List  
+from typing import List  
+from dateutil import parser 
 import pandas as pd  
 import pyodbc  
-from datetime import datetime  
-from datetime import datetime as dt
 from fastapi.responses import FileResponse  
+# import the normalize_date_format function from backend_helper.py
+from python_fastapi_data_retrival_app.utils.backend_helper import normalize_date_format
   
 app = FastAPI()  
-  
-  
+ 
 class Filter(BaseModel):  
     start_date: str  
     end_date: str  
@@ -21,14 +21,8 @@ async def get_data(filter: Filter):
     table_name = "active_fw_table"
     date_column = "RUN_DATE"
     # convert input to datetime
-    print(filter.start_date)
-    print(filter.end_date)
-    print(filter.columns)
-    #date_format = "%Y-%m-%dT%H:%M:%S.%fZ"
-    date_format = "%Y-%m-%d"
-    #date_format = "%Y-%m-%dT%H:%M:%S"
-    start_date = dt.strptime(filter.start_date, date_format)
-    end_date = dt.strptime(filter.end_date, date_format)
+    start_date = normalize_date_format(filter.start_date)
+    end_date = normalize_date_format(filter.end_date)
     # Data Source Name (DSN) that you created when setting up odbc databricks connector.
     conn = pyodbc.connect("DSN=Databricks_Cluster", autocommit=True)
     # Define your SQL query here  
@@ -49,10 +43,8 @@ async def get_data(filter: Filter):
     # Save dataframe to csv  
     data.to_csv('data/data.csv', index=False)   
   
-    # Convert the DataFrame to a dictionary and return it  
+    # Convert the DataFrame to a dictionary and return API call
     return data.to_dict('records')  
-  
-    #return {"message": "Data processed and saved to data.csv"}  
   
 @app.get("/download/")  
 async def download_csv():  
