@@ -6,7 +6,14 @@
 [![Commit activity](https://img.shields.io/github/commit-activity/m/Lishuaijing3/python-fastapi-data-retrival-app)](https://img.shields.io/github/commit-activity/m/Lishuaijing3/python-fastapi-data-retrival-app)
 [![License](https://img.shields.io/github/license/Lishuaijing3/python-fastapi-data-retrival-app)](https://img.shields.io/github/license/Lishuaijing3/python-fastapi-data-retrival-app)
 
-This project using python fastAPI framework to retrieve data from a databricks workspace (you can customize to similar databases) and display it using dash.
+This project uses a couple of python frontend and backend frameworks to build data science applications or webapps. It shows how to connect with databricks backend and display data on the frontend of a choice. 
+
+For the front end, included frameworks are:
+- DASH
+- Streamlit
+- Gradio
+
+For backend, fastAPI as the framework for query database for building high performance and modern APIs.  
 
 - **Github repository**: <https://github.com/Lishuaijing3/python-fastapi-data-retrival-app/>
 - **Documentation** <https://Lishuaijing3.github.io/python-fastapi-data-retrival-app/>
