@@ -6,7 +6,6 @@ import pyodbc
 from datetime import datetime  
 from datetime import datetime as dt
 from fastapi.responses import FileResponse  
-import os 
   
 app = FastAPI()  
   
@@ -19,12 +18,12 @@ class Filter(BaseModel):
 @app.post("/data/")  
 async def get_data(filter: Filter):  
     # Define your databricks SQL connection here  
-    # Replace <table-name> with the name of the database table to query.
-    table_name = os.environ.get('TABLE_NAME')
-    date_column = os.getenv("DATE_COLUMN")
+    table_name = "active_fw_table"
+    date_column = "RUN_DATE"
     # convert input to datetime
     print(filter.start_date)
     print(filter.end_date)
+    print(filter.columns)
     #date_format = "%Y-%m-%dT%H:%M:%S.%fZ"
     date_format = "%Y-%m-%d"
     #date_format = "%Y-%m-%dT%H:%M:%S"
@@ -38,7 +37,7 @@ async def get_data(filter: Filter):
     FROM {table_name}  
     WHERE {date_column} BETWEEN '{start_date}' AND '{end_date}'  
     """  
-  
+    print(sql_query)
     try:  
         data = pd.read_sql(sql_query, conn)  
     except Exception as e:  
