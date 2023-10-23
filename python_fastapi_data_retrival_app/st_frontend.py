@@ -19,8 +19,10 @@ st.title('Single user data retrival app')
 #poetry run streamlit run python_fastapi_data_retrival_app/st_frontend.py
 #%%
 @st.cache_data
-def get_data(start_date, end_date):
-    cols_to_retrieve = os.getenv("COLUMNS").split(',')
+def get_data(start_date, end_date,cols_to_retrieve):
+    start_date = str(start_date)
+    end_date = str(end_date)
+    
     response = requests.post('http://localhost:8000/data',    
                                 json={"start_date": start_date, "end_date": end_date,    
                                     "columns": cols_to_retrieve})    
@@ -37,18 +39,17 @@ def get_data(start_date, end_date):
 if 'retrived_data' not in st.session_state:
     st.session_state.retrived_data = None
 
-start_date = st.sidebar.text_input("Start date", value='2023-10-01')
-end_date = st.sidebar.text_input("End date", value='2023-10-02')
+start_date = st.sidebar.date_input("Start date", value=pd.to_datetime('2023-10-01'))
+end_date = st.sidebar.date_input("End date", value=pd.to_datetime('2023-10-02'))
+cols_to_retrieve = os.getenv("COLUMNS").split(',')
 
 # show a table with the data
 st.write('## Data retrival')
 if st.button('Submit'):
-    message, data, columns = get_data(start_date, end_date)
+    message, data, columns = get_data(start_date, end_date, cols_to_retrieve)
     st.session_state.retrived_data = pd.DataFrame(data)
     st.write(pd.DataFrame(data))
     st.write(message)
-
-# add download button to download the dataframe
 
 # Button to download the retrieved data
 if st.button("Download Data"):

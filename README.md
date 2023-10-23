@@ -50,10 +50,21 @@ poetry run uvicorn python_fastapi_data_retrival_app.fastAPI_backend:app --port 8
 ``` 
 To test the backend, using http://127.0.0.1:8000/docs, then you can use post and get methods to interact with the two APIs.
 
-### run dash front end
+### Run dash front end
 ``` bash
 poetry run python python_fastapi_data_retrival_app/dash_frontend.py
 ``` 
+
+### Run streamlit front end
+``` bash
+poetry run python python_fastapi_data_retrival_app/st_frontend.py
+```
+
+### Run gradio front end 
+``` bash
+poetry run python python_fastapi_data_retrival_app/gradio_frontend.py
+``` 
+
 ## Releasing a new version
 ---
 
