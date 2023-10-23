@@ -1,4 +1,4 @@
-from python_fastapi_data_retrival_app.fastAPi_backend import normalize_date_format
+from python_fastapi_data_retrival_app.utils.backend_helper import normalize_date_format
 
 
 def test_normalize_date_format():
